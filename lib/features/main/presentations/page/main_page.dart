@@ -4,6 +4,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:mawqifi_driver/common/color-extension.dart';
 import 'package:mawqifi_driver/common/globs.dart';
+import 'package:mawqifi_driver/common/permissions_manger.dart';
 import 'package:mawqifi_driver/features/booking/presentation/page/booking_list_page.dart';
 import 'package:mawqifi_driver/features/proflie/presentations/pages/profile_page.dart';
 
@@ -39,6 +40,7 @@ class _MainPageState extends State<MainPage> {
   @override
   void initState() {
     _getToken();
+    PermissionsManger.askForNotificationPermission();
     super.initState();
   }
 

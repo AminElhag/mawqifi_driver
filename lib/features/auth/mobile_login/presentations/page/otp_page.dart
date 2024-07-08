@@ -1,8 +1,10 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl_phone_field/phone_number.dart';
 import 'package:mawqifi_driver/common/color-extension.dart';
+import 'package:mawqifi_driver/common/fire_base_extension.dart';
 import 'package:mawqifi_driver/common/globs.dart';
 import 'package:mawqifi_driver/common_widget/round_button.dart';
 import 'package:mawqifi_driver/features/auth/mobile_login/presentations/cubit/otp/otp_cubit.dart';
@@ -32,6 +34,12 @@ class _OTPPageState extends State<OTPPage> {
   final OtpTimerButtonController _otpTimeController =
       OtpTimerButtonController();
   late var _otp = "";
+
+  @override
+  void initState() {
+    FireBaseExtension.getToken();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -94,6 +102,7 @@ class _OTPPageState extends State<OTPPage> {
             Globs.udIntSet(state.otpVerificationModel.profile!.userId,
                 PreferenceKey.userId);
             Globs.hideHUD();
+            context.read<OtpCubit>().setFcmToken(state.otpVerificationModel.profile!.userId);
             Navigator.push(context, MainPage.route());
           }
         },

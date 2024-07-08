@@ -4,7 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:intl_phone_field/phone_number.dart';
 import 'package:mawqifi_driver/common/color-extension.dart';
+import 'package:mawqifi_driver/common/fire_base_extension.dart';
 import 'package:mawqifi_driver/common/globs.dart';
+import 'package:mawqifi_driver/common/permissions_manger.dart';
 import 'package:mawqifi_driver/common_widget/round_button.dart';
 import 'package:mawqifi_driver/features/auth/mobile_login/presentations/cubit/mobile_login/mobile_login_cubit.dart';
 import 'package:mawqifi_driver/features/auth/mobile_login/presentations/page/otp_page.dart';
@@ -27,16 +29,10 @@ class _MobileNumberPageState extends State<MobileNumberPage> {
   bool isValidNumber = false;
   PhoneNumber? phoneNumber;
 
-  Future<void> _getToken() async {
-    final FirebaseMessaging _fcm = FirebaseMessaging.instance;
-    final deviceToken = await _fcm.getToken();
-    Globs.udStringSet(deviceToken?? "", PreferenceKey.fcmToken);
-    print("token = " + deviceToken.toString());
-  }
-
   @override
   void initState() {
-    _getToken();
+    FireBaseExtension.getToken();
+    PermissionsManger.askForNotificationPermission();
     super.initState();
   }
 

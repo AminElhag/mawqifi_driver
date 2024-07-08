@@ -89,6 +89,7 @@ class SVKey {
   static const svLogin = "${baseUrl}login";
   static const svMobileLogin = "${authBaseUrl}mobile";
   static const svOtp = "${authBaseUrl}otp/verification";
+  static const svFcmToken = "${authBaseUrl}fcmToken";
 
   static const svCreateProfile = "${baseUrl}profile";
   static const svVehicle = "${svCreateProfile}/vehicle";

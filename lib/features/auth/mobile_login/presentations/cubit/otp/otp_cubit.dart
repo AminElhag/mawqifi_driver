@@ -85,4 +85,13 @@ class OtpCubit extends Cubit<OtpState> {
       emit(OtpErrorState(e.toString()));
     }
   }
+
+  void setFcmToken(int userId) {
+    try {
+      ServiceCall.post({
+        "fcm_token": Globs.udValueString(PreferenceKey.fcmToken),
+        "user_id": userId
+      }, SVKey.svFcmToken, isTokenApi: true);
+    } catch (e) {}
+  }
 }
